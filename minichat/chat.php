@@ -26,17 +26,29 @@ if(isset($_POST['name']) and isset($_POST['message'])) {
 <body>
 
     <div>
-        <form action='chat.php' method='POST'>
+    
+        <form action='chat.php' method='POST'> 
             <div>
                 <label for='name'>Name</label>
-                <input id='name' name='name' type='text' <?php if(isset($_POST['name'])) echo 'value=\'' . $_POST['name'] . '\' '; ?>/>
+                <input 
+                    id='name' 
+                    name='name' 
+                    type='text' 
+                    <?php 
+                        if(isset($_POST['name'])) 
+                            echo 'value=\'' . $_POST['name'] . '\' '; 
+                    ?>
+                />
             </div>
+            
             <div>                
                 <label for='message'>Message</label>
                 <input id='message' name='message' type='text' /> 
             </div>
-            <input type='submit' value='Submit' />
+            
+            <input type='submit' value='Submit' />        
         </form>
+        
     </div>
 
     <div>

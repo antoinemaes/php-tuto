@@ -47,19 +47,30 @@
         </form>
         
     </div>
+    
+    <?php
+    try {
+        $db = new PDO('mysql:host=localhost;dbname=chat;charset=utf8', 'antoine', 'sqvmf72w');
+    }
+    catch (Exception $e) {
+        die('Error : ' . $e->getMessage());
+    }
+    
+    $response=$db->query('SELECT COUNT(*) FROM Messages');
+    $line = $response->fetch();
+    $count = $line[0];
+    ?>
 
     <div>
+
         <?php
-        try {
-            $db = new PDO('mysql:host=localhost;dbname=chat;charset=utf8', 'antoine', 'sqvmf72w');
-        }
-        catch (Exception $e) {
-            die('Error : ' . $e->getMessage());
-        }
+        $page=isset($_GET['page']) ? $_GET['page'] : 1;
         
-        $response=$db->query('SELECT name, message FROM Messages ORDER BY id DESC LIMIT 10') or die(print_r($db->errorInfo()));
+        $request=$db->prepare('SELECT name, message FROM Messages ORDER BY id DESC LIMIT ?, 10');
+        $request->bindValue(1, 10*($page-1), PDO::PARAM_INT);
+        $request->execute();
         
-        while($line = $response->fetch()) {
+        while($line = $request->fetch()) {
         ?>
             <p><strong><?php echo htmlspecialchars($line['name']);?></strong> : <?php echo htmlspecialchars($line['message']);?></p> 
         <?php
@@ -67,6 +78,15 @@
 
         $response->closeCursor();
         ?>
+        
     </div>
+    
+    <footer>
+        <?php
+        for($i=1;$i<=$count/10+1;$i++)
+            echo '<a href=\'chat.php?page=' . $i . '\'>' . $i . '</a> ';
+        ?>
+    </footer>
+    
 
 </body>

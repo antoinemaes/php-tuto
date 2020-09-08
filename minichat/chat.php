@@ -7,13 +7,6 @@ catch (Exception $e)
 {
     die('Error : ' . $e->getMessage());
 }
-
-if(isset($_POST['name']) and isset($_POST['message'])) {
-    if(strlen($_POST['name']) <= 50) {
-        $req = $db->prepare('INSERT INTO Messages (name, message) VALUES (?, ?)');
-        $req->execute(array($_POST['name'], $_POST['message']));
-    }
-}
 ?>
 
 <!DOCTYPE HTML>
@@ -27,23 +20,38 @@ if(isset($_POST['name']) and isset($_POST['message'])) {
 
     <div>
     
-        <form action='chat.php' method='POST'> 
+        <form action='chat_post.php' method='POST'> 
             <div>
                 <label for='name'>Name</label>
                 <input 
                     id='name' 
                     name='name' 
                     type='text' 
+                    maxlength='20'
+                    required
                     <?php 
-                        if(isset($_POST['name'])) 
-                            echo 'value=\'' . $_POST['name'] . '\' '; 
+                        if(isset($_COOKIE['name'])) 
+                            echo 'value=\'' . $_COOKIE['name'] . '\' ';
+                        else
+                            echo 'autofocus';
                     ?>
                 />
             </div>
             
             <div>                
                 <label for='message'>Message</label>
-                <input id='message' name='message' type='text' /> 
+                <input 
+                    id='message' 
+                    name='message' 
+                    type='text' 
+                    maxlength='200' 
+                    required
+                    autocomplete='off'
+                    <?php
+                        if(isset($_COOKIE['name']))
+                            echo 'autofocus';
+                    ?>
+                /> 
             </div>
             
             <input type='submit' value='Submit' />        

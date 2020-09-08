@@ -1,14 +1,3 @@
-<?php 
-try
-{
-	$db = new PDO('mysql:host=localhost;dbname=chat;charset=utf8', 'antoine', 'sqvmf72w');
-}
-catch (Exception $e)
-{
-    die('Error : ' . $e->getMessage());
-}
-?>
-
 <!DOCTYPE HTML>
 
 <head>
@@ -30,10 +19,10 @@ catch (Exception $e)
                     maxlength='20'
                     required
                     <?php 
-                        if(isset($_COOKIE['name'])) 
-                            echo 'value=\'' . $_COOKIE['name'] . '\' ';
-                        else
-                            echo 'autofocus';
+                    if(isset($_COOKIE['name'])) 
+                        echo 'value=\'' . $_COOKIE['name'] . '\' ';
+                    else
+                        echo 'autofocus';
                     ?>
                 />
             </div>
@@ -48,8 +37,8 @@ catch (Exception $e)
                     required
                     autocomplete='off'
                     <?php
-                        if(isset($_COOKIE['name']))
-                            echo 'autofocus';
+                    if(isset($_COOKIE['name']))
+                        echo 'autofocus';
                     ?>
                 /> 
             </div>
@@ -61,6 +50,13 @@ catch (Exception $e)
 
     <div>
         <?php
+        try {
+            $db = new PDO('mysql:host=localhost;dbname=chat;charset=utf8', 'antoine', 'sqvmf72w');
+        }
+        catch (Exception $e) {
+            die('Error : ' . $e->getMessage());
+        }
+        
         $response=$db->query('SELECT name, message FROM Messages ORDER BY id DESC LIMIT 10') or die(print_r($db->errorInfo()));
         
         while($line = $response->fetch()) {

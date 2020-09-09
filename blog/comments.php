@@ -21,7 +21,7 @@
                 die('Error : ' . $e->getMessage());
             }
             
-            $request=$pdo->prepare("SELECT id, title, DATE_FORMAT(date, '%M %D, %Y at %l:%i%p') as date_string, content FROM Article WHERE id=?");
+            $request=$pdo->prepare("SELECT id, title, DATE_FORMAT(date, '%M %D, %Y at %l:%i%p') as date_string, content FROM Article WHERE id=? ORDER BY date");
             $request->execute(array($_GET['article_id']));
             
             if($request) {

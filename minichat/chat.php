@@ -7,7 +7,7 @@
 
 <body>
 
-    <div>
+    <div id='message_form'>
     
         <form action='chat_post.php' method='POST'> 
             <div>
@@ -60,8 +60,8 @@
     $line = $response->fetch();
     $count = $line[0];
     ?>
-
-    <div>
+    
+    <div id='messages'>
 
         <?php
         $page=isset($_GET['page']) ? $_GET['page'] : 1;

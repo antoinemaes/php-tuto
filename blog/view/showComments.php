@@ -13,7 +13,7 @@
         <div class='article'>
             <h2><?= htmlspecialchars($article['title']) ?></h2>
             <h3><?= htmlspecialchars($article['date_string']) ?></h3>
-            <p><?= htmlspecialchars($article['content']) ?></p>
+            <p><?= nl2br(htmlspecialchars($article['content'])) ?></p>
         </div>
         
         <div id='comment-section'>
@@ -22,8 +22,8 @@
             while($line=$comments->fetch()) {
                 ?>
                 <div class='comment'>
-                    <p><strong><?= $line['author'] ?></strong>, <?= $line['date_string'] ?></p>
-                    <p><?= $line['content'] ?></p>
+                    <p><strong><?= htmlspecialchars($line['author']) ?></strong>, <?= $line['date_string'] ?></p>
+                    <p><?= nl2br(htmlspecialchars($line['content'])) ?></p>
                 </div>
                 <?php
             }
@@ -32,7 +32,7 @@
         
         <div id='comment-form'>
             <form 
-                action=<?= '"comments_post.php?article_id='.$article_id.'"' ?> 
+                action=<?= '"index.php?action=postComment&article_id='.$article_id.'"' ?> 
                 method='POST'>
                 <div>
                     <label for='name'>Name</label>
@@ -52,6 +52,6 @@
     </main>
     
     <footer>
-        <a href='index.php'>Back to articles</a>
+        <a href='index.php?action=showArticles'>Back to articles</a>
     </footer>
 </body>

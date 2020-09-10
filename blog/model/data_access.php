@@ -36,3 +36,9 @@ function getCommentsFromArticle($article_id) {
     $request->execute(array($article_id));
     return $request;
 }
+
+function putComment($author, $comment, $article_id) {
+    global $pdo;
+    $req = $pdo->prepare('INSERT INTO Comment (author, content, article_id) VALUES (?, ?, ?)');
+    $req->execute(array($author, $comment, $article_id));
+}

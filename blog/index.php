@@ -1,9 +1,19 @@
 <?php
+require('controller/front.php');
+$action=isset($_GET['action'])? $_GET['action'] : 'showArticles';
 
-require('model/data_access.php');
+switch($action) {
 
-$page=isset($_GET['page']) ? $_GET['page'] : 1;
-$count=getArticleCount();
-$articles=getLastArticles($page);
+    case 'showArticles':
+        showArticles();
+        break;
+    case 'showComments':
+        showComments();
+        break;
+    case 'postComment':
+        postComment();
+        break;
+    default:
+        echo '<p>Error : invalid value for action parameter.</p>';
 
-require('view/articles.php');
+}

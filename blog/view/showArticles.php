@@ -16,8 +16,8 @@
             <div class='article'>
                 <h2><?= htmlspecialchars($line['title'])?></h2>
                 <h3><?= htmlspecialchars($line['date_string'])?></h3>
-                <p><?= htmlspecialchars($line['content'])?></p>
-                <a href=<?= '"comments.php?article_id='.$line['id'].'"'?>>Comments</a>
+                <p><?= nl2br(htmlspecialchars($line['content']))?></p>
+                <a href=<?= '"index.php?action=showComments&article_id='.$line['id'].'"'?>>Comments</a>
             </div>
             <?php
         }
@@ -28,7 +28,7 @@
     <footer>
         <?php
         for($i=1;$i<=$count/5+1;$i++)
-            echo '<a href="articles.php?page=' . $i . '">' . $i . '</a> ';
+            echo '<a href="index.php?action=showArticles&page=' . $i . '">' . $i . '</a> ';
         ?>
     </footer>
 

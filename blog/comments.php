@@ -39,7 +39,7 @@
                 $request->execute(array($_GET['article_id']));
                 
                 ?>
-                <div class='comment-section'>
+                <div id='comment-section'>
                     <h2>Comments</h2>
                     <?php
                     while($line=$request->fetch()) {
@@ -51,6 +51,24 @@
                         <?php
                     }
                     ?>
+                </div>
+                
+                <div id='comment-form'>
+                    <form 
+                        action=<?php echo '"comments_post.php?article_id=' . $_GET['article_id'] . '"';?> 
+                        method='POST'>
+                        <div>
+                            <label for='name'>Name</label>
+                            <input id='name' type='text' name='name' maxlength=50 required />
+                        </div>
+                       
+                        <div>
+                            <label for='comment'>Comment</label>
+                            <textarea id='comment' name='comment'></textarea>
+                        </div>
+                        
+                        <input type='submit' value='Submit' />
+                    </form>
                 </div>
             <?php
             } else {

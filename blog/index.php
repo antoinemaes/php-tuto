@@ -1,6 +1,7 @@
 <?php
 require('controller/front.php');
-$action=isset($_GET['action'])? $_GET['action'] : 'showArticles';
+$action = isset($_GET['action']) ?
+  $_GET['action'] : 'showArticles';
 
 switch($action) {
 
@@ -14,6 +15,7 @@ switch($action) {
         postComment();
         break;
     default:
-        echo '<p>Error : invalid value for action parameter.</p>';
+        echo
+          '<p>Error : invalid value for action parameter.</p>';
 
 }

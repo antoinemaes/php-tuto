@@ -1,17 +1,20 @@
 <?php
 require('model/data_access.php');
+require('autoload.php');
 
 function showArticles() {
-    $page=isset($_GET['page']) ? $_GET['page'] : 1;
-    $count=getArticleCount();
-    $articles=getLastArticles($page);
+    $mgr = new PDOArticleManager();
+    $page = isset($_GET['page']) ? $_GET['page'] : 1;
+    $count = $mgr->getArticleCount();
+    $articles = $mgr->getLastArticles($page);
     require('view/showArticles.php');
 }
 
 function showComments() {
+    $mgr = new PDOArticleManager();
     if(isset($_GET['article_id'])) {
         $article_id=$_GET['article_id'];
-        $article=getArticleById($article_id);
+        $article=$mgr->getArticleById($article_id);
         $comments=getCommentsFromArticle($article_id);
         require('view/showComments.php');
     } else {

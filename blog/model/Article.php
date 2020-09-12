@@ -1,5 +1,7 @@
 <?php
 
+namespace Antoine\blog\model;
+
 class Article {
 
     private $id;

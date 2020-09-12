@@ -1,5 +1,7 @@
 <?php
 
+namespace Antoine\blog\model;
+
 /**
  *
  */
@@ -17,12 +19,12 @@ class PDOCommentManager implements CommentManager
   public function __construct()
   {
     try {
-        $this->_pdo = new PDO(
+        $this->_pdo = new \PDO(
           'mysql:host=localhost;dbname=blog;charset=utf8',
           'antoine',
           'sqvmf72w');
     }
-    catch (PDOException $e) {
+    catch (\PDOException $e) {
       // TODO error management:
         die('Error : ' . $e->getMessage());
     }
@@ -33,7 +35,7 @@ class PDOCommentManager implements CommentManager
       $request=$this->_pdo->prepare(self::QUERY_GET);
 
       $request->execute(array($article_id));
-      $request->setFetchMode(PDO::FETCH_CLASS, 'Comment');
+      $request->setFetchMode(\PDO::FETCH_CLASS, 'Antoine\blog\model\Comment');
 
       return $request->fetchAll();
   }

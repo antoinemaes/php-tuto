@@ -1,4 +1,5 @@
 <?php
+require('controller/autoload.php');
 require('controller/front.php');
 $action = isset($_GET['action']) ?
   $_GET['action'] : 'showArticles';

@@ -1,5 +1,10 @@
 <?php
-require('autoload.php');
+
+use Antoine\blog\model\PDOArticleManager;
+use Antoine\blog\model\PDOCommentManager;
+
+use Antoine\blog\model\Comment;
+use Antoine\blog\model\Article;
 
 function showArticles() {
     $mgr = new PDOArticleManager;

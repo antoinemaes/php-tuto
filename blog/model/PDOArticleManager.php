@@ -1,5 +1,7 @@
 <?php
 
+namespace Antoine\blog\model;
+
 /**
  *
  */
@@ -16,12 +18,12 @@ class PDOArticleManager implements ArticleManager
   public function __construct()
   {
     try {
-        $this->_pdo = new PDO(
+        $this->_pdo = new \PDO(
           'mysql:host=localhost;dbname=blog;charset=utf8',
           'antoine',
           'sqvmf72w');
     }
-    catch (PDOException $e) {
+    catch (\PDOException $e) {
       // TODO error management:
         die('Error : ' . $e->getMessage());
     }
@@ -38,11 +40,11 @@ class PDOArticleManager implements ArticleManager
   public function getLastArticles($page=1, $limit=5) {
 
     $request=$this->_pdo->prepare(self::QUERY_LAST);
-    $request->bindValue(1, $limit*($page-1), PDO::PARAM_INT);
-    $request->bindValue(2, $limit, PDO::PARAM_INT);
+    $request->bindValue(1, $limit*($page-1), \PDO::PARAM_INT);
+    $request->bindValue(2, $limit, \PDO::PARAM_INT);
 
     $request->execute();
-    $request->setFetchMode(PDO::FETCH_CLASS, 'Article');
+    $request->setFetchMode(\PDO::FETCH_CLASS, 'Antoine\blog\model\Article');
 
     return $request->fetchAll();
 
@@ -54,7 +56,7 @@ class PDOArticleManager implements ArticleManager
     $request->execute(array($id));
 
     if($request) {
-      $request->setFetchMode(PDO::FETCH_CLASS, 'Article');
+      $request->setFetchMode(\PDO::FETCH_CLASS, 'Antoine\blog\model\Article');
       return $request->fetch();
     }
 

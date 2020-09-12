@@ -13,7 +13,7 @@ class PDOArticleManager implements ArticleManager
 
   private $_pdo;
 
-  function __construct()
+  public function __construct()
   {
     try {
         $this->_pdo = new PDO(
@@ -44,8 +44,7 @@ class PDOArticleManager implements ArticleManager
     $request->execute();
     $request->setFetchMode(PDO::FETCH_CLASS, 'Article');
 
-    $articles = $request->fetchAll();
-    return $articles;
+    return $request->fetchAll();
 
   }
 

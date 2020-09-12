@@ -39,6 +39,9 @@ class Comment {
     }
 
     public function setAuthor($author) {
+      if(!is_string($author) or empty($author) or strlen($author) > 50)
+        throw new InvalidArgumentException(
+          'Author must be a non-empty string of length inferior to 50.');
       $this->author = $author;
     }
 
@@ -47,6 +50,9 @@ class Comment {
     }
 
     public function setContent($content) {
+      if(!is_string($content) or empty($content))
+        throw new InvalidArgumentException(
+          'Content must be a non-empty string.');
       $this->content = $content;
     }
 

@@ -54,6 +54,9 @@ class Article {
      */
     public function setTitle($_title)
     {
+        if(!is_string($_title) or empty($_title) or strlen($_title) > 100)
+          throw new InvalidArgumentException(
+            'Title must be a non-empty string of length inferior to 100.');
         $this->title = $_title;
     }
 
@@ -62,7 +65,7 @@ class Article {
      */
     public function setDate(DateTime $_date)
     {
-        $this->date = $_date;
+      $this->date = $_date;
     }
 
     /**
@@ -70,7 +73,10 @@ class Article {
      */
     public function setContent($_content)
     {
-        $this->content = $_content;
+      if(!is_string($content) or empty($content))
+        throw new InvalidArgumentException(
+          'Content must be a non-empty string.');
+      $this->content = $_content;
     }
 
 

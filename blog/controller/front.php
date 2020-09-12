@@ -40,6 +40,6 @@ function postComment() {
         header('Location: index.php?'
           .'action=showComments&article_id='.$_GET['article_id']);
     } else {
-        echo 'Error : missing parameter.';
+        echo '<p>Error : missing parameter.</p>';
     }
 }
